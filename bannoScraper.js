@@ -18,7 +18,7 @@ was correct in order to get the data.
    as keys and the amount of times they occur as their associated value.
    It then creates a sorted array from the dictionary key-value pairs 
    and then returns the top three most occurring characters.*/
-export function topThree(htmlStr) {
+function topThree(htmlStr) {
 
     if ((typeof htmlStr) !== 'String') {
         var inputError = "Incorrect input: requires a string";
