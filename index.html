@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta name="Description" content="This is the UI for my Banno Interview Assignment.">
+
+    <!--Scripts-->
+    <script src="bannoScraper.js"></script>
+    <script src="warpspeed.min.js"></script>
+
+    <!--Styles-->
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Roboto" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div style="z-index: -1;">
+        <canvas id="bkFrame" style="height: 1200px; width: 100%;"></canvas>
+        <script type="text/javascript">
+            ai_background = new WarpSpeed("bkFrame", {
+                targetSpeed: 0.8,
+                speedAdjFactor: 0.07,
+                shape: "square",
+                backgroundColor: "hsl(263,45%,8%)",
+                speedWhileLoading: 18
+            });
+        </script>
+    </div>
+    <div class="main-area">
+
+        <div class="card">
+            <h1 class="card-title">Banno Boot Camp Application Assignment</h1>
+            <hr>
+            <p style="padding-left: 3em; padding-right: 3em">Hello! Press that button below to retrieve the task information from Banno.com! </p>
+            <hr>
+            <a href="#" class="button1 collapsible">Give Me The Goods</a>
+
+            <div class="container">
+                <ul class="responsive-table">
+                    <li class="table-header">
+                        <div class="col col-1">Query</div>
+                        <div class="col col-2">Results</div>
+                    </li>
+                    <li class="table-row">
+                        <div class="col col-1">42235</div>
+                        <div class="col col-2">John Doe</div>
+                    </li>
+                    <li class="table-row">
+                        <div class="col col-1">42442</div>
+                        <div class="col col-2">Jennifer Smith</div>
+                    </li>
+                    <li class="table-row">
+                        <div class="col col-1">42257</div>
+                        <div class="col col-2">John Smith</div>
+                    </li>
+                    <li class="table-row">
+                        <div class="col col-1">42311</div>
+                        <div class="col col-2">John Carpenter</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
