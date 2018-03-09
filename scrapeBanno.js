@@ -20,9 +20,8 @@ was correct in order to get the data.
    and then returns the top three most occurring characters.*/
 function topThree(htmlStr) {
 
-    if ((typeof htmlStr) !== 'String') {
+    if ((typeof htmlStr) != "string") {
         var inputError = "Incorrect input: requires a string";
-        console.error(inputError);
         return inputError;
 
     } else {
@@ -64,24 +63,45 @@ function topThree(htmlStr) {
 
 /* This function finds every mention of a .png file in the html of the site. */
 function countPNG(htmlStr) {
+
+    if ((typeof htmlStr) != "string") {
+        var inputError = "Incorrect input: requires a string";
+        return inputError;
+
+    } else {
     /*Creates a variable called count that uses the .match() function to 
      find every mention of .png. Puts those occurances into an array and 
      takes the length of the array to get the "count".*/
     var count = (htmlStr.match(/.png/g) || []).length;
     return count;
+    };
 }
 
 /*This function finds every mention of a .png file in the html of the site. */
 function getStrOccurance(htmlStr) {
+
+    if ((typeof htmlStr) != "string") {
+        var inputError = "Incorrect input: requires a string";
+        return inputError;
+
+    } else {
     /*Creates a variable called count that uses the .match() function to 
      find every mention of 'financial institution'. Puts those occurances into an array and 
      takes the length of the array to get the "count".*/
     var count = (htmlStr.match(/ financial institution/g) || []).length;
     return count;
+    };
 }
 
 /*This function finds the twitter handle listed in the meta tags of the HTML.*/
 function getTwitterHandle(htmlStr) {
+
+    if ((typeof htmlStr) != "string") {
+        var inputError = "Incorrect input: requires a string";
+        return inputError;
+
+    } else {
+
     /*Removes everything before "twitter:site"content=" in the string by 
     first finding whereToSlice*/
     var whereToSlice = htmlStr.indexOf('"twitter:site"content="')
@@ -104,6 +124,11 @@ function getTwitterHandle(htmlStr) {
                 }
             }
         }
+        
+    }
+    if (twitterHandle === '') {
+        return "Unable to locate Twitter handle."
+    }
     }
 }
 
@@ -112,8 +137,17 @@ class used for each product in the HTML, Splits at each instance
 and counts each section of the split string. Subtract 1 to account
 for the last section having no instance of feature-group-label. */
 function getProductCount(htmlStr) {
+
+    if ((typeof htmlStr) != "string") {
+        var inputError = "Incorrect input: requires a string";
+        return inputError;
+
+    } else {
+
     var htmlForProduct = 'feature-group-label';
     return htmlStr.split(htmlForProduct).length - 1;
+
+    }
 }
 
 console.log('');
@@ -174,3 +208,10 @@ console.timeEnd("Execution time");
 
 
 /*exports for testing in test.js*/
+module.exports = {
+    topThree: topThree,
+    countPNG: countPNG,
+    getStrOccurance: getStrOccurance,
+    getTwitterHandle: getTwitterHandle,
+    getProductCount: getProductCount
+}
