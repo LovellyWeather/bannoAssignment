@@ -12,10 +12,10 @@ Axios is promise based so we have to check if the response
 was correct in order to get the data.
 */
 
- /*The function topThree creates a dictionary with all alphanumeric characters
-    as keys and the amount of times they occur as their associated value.
-    It then creates a sorted array from the dictionary key-value pairs 
-    and then returns the top three most occurring characters.*/
+/*The function topThree creates a dictionary with all alphanumeric characters
+   as keys and the amount of times they occur as their associated value.
+   It then creates a sorted array from the dictionary key-value pairs 
+   and then returns the top three most occurring characters.*/
 function topThree(htmlStr) {
     /*First we create our dictionary object and sortable array.*/
     var dict = {};
@@ -37,7 +37,7 @@ function topThree(htmlStr) {
         sortableDict.push([key, dict[key]]);
     }
     /*Now we sort the array.*/
-    sortableDict.sort(function(a, b) {
+    sortableDict.sort(function (a, b) {
         return a[1] - b[1];
     });
 
@@ -49,7 +49,7 @@ function topThree(htmlStr) {
 
     return [topChar, topChar2, topChar3];
 
-    
+
 }
 
 function countPNG(htmlStr) {
@@ -63,10 +63,11 @@ function getStrOccurance(htmlStr) {
 }
 
 function getHTML() {
-    requestify.get('https://banno.com').then(function(response) {
-    // Get the response body 
-    respones.getBody();
-    })};
+    requestify.get('https://banno.com').then(function (response) {
+        // Get the response body 
+        respones.getBody();
+    })
+};
 
 function getTwitterHandle(htmlStr) {
     var whereToSlice = htmlStr.indexOf('"twitter:site"content="')
@@ -86,42 +87,50 @@ function getTwitterHandle(htmlStr) {
     }
 }
 
-function getProductCount (htmlStr) {
+function getProductCount(htmlStr) {
     var htmlForProduct = 'feature-group-label';
     return htmlStr.split(htmlForProduct).length - 1;
 }
 
 
 
-
+console.time("Execution time took");
 axios.get('https://banno.com')
     .then((response) => {
-        if(response.status === 200) {
+        if (response.status === 200) {
 
             const html = response.data;
             const $ = cheerio.load(html);
             const text$ = $.text().trim();
             const clean$ = $.html().replace(/\s+/g, '');
 
-            console.log("Twitter Handle: ", getTwitterHandle(clean$));
-            console.log("Top Three Characters: ", topThree(clean$));
-            console.log("PNG's: ", countPNG(clean$));
-            console.log("Financial Institution Occurance: ", getStrOccurance(text$));
+            console.log("|---------------------------------------------------------------------------|");
+            console.log("| Top Three Characters: ", topThree(clean$));
+            console.log("|-");
+            console.log("| PNG's: ", countPNG(clean$));
+            console.log("|-");
+            console.log("| Twitter Handle: ", getTwitterHandle(clean$));
+            console.log("|-");
+            console.log("| Financial Institution Occurance: " + getStrOccurance(text$));
+            console.log("|-");
 
-        
+
+
         }
-    }, (error) => console.log(err) );
+    }, (error) => console.log(err));
 
 
 axios.get('https://banno.com/features')
     .then((response) => {
-        if(response.status === 200) {
+        if (response.status === 200) {
             const html = response.data;
             const $ = cheerio.load(html);
             const text$ = $.text().trim();
             const clean$ = $.html().replace(/\s+/g, '');
 
-            console.log(getProductCount(clean$));
+            console.log("| Products listed: ", getProductCount(clean$));
+            console.log("|---------------------------------------------------------------------------|");
         }
-    }, (error) => console.log(err) );
+    }, (error) => console.log(err));
 
+console.timeEnd("Execution time took");
